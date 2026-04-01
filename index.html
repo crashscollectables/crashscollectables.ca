@@ -645,15 +645,40 @@
   });
 
   // ── FORM ──
-  function submitForm() {
+  async function submitForm() {
     const fname = document.getElementById('f_fname').value.trim();
+    const lname = document.getElementById('f_lname').value.trim();
     const email = document.getElementById('f_email').value.trim();
-    const msg = document.getElementById('f_msg').value.trim();
+    const type  = document.getElementById('f_type').value;
+    const msg   = document.getElementById('f_msg').value.trim();
+
     if (!fname || !email || !msg) {
       toast('⚠️ Please fill in name, email, and message.', false); return;
     }
-    ['f_fname','f_lname','f_email','f_type','f_msg'].forEach(id => document.getElementById(id).value = '');
-    toast('✅ Message sent! We\'ll be in touch soon.');
+
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mqegllww', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: fname + ' ' + lname, email, inquiryType: type, message: msg })
+      });
+
+      if (res.ok) {
+        ['f_fname','f_lname','f_email','f_type','f_msg'].forEach(id => document.getElementById(id).value = '');
+        toast('✅ Message sent! We\'ll be in touch soon.');
+      } else {
+        toast('❌ Something went wrong. Try emailing us directly.', false);
+      }
+    } catch(e) {
+      toast('❌ Network error. Please try again.', false);
+    }
+
+    btn.textContent = 'Send Message ✉️';
+    btn.disabled = false;
   }
 
   function toast(msg, ok = true) {
