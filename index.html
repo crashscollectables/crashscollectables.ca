@@ -460,9 +460,9 @@
     </div>
     <div class="shop-filters">
       <button class="filter-btn active" onclick="filterShop('all',this)">All</button>
-      <button class="filter-btn" onclick="filterShop('funko',this)">Funko Pops</button>
-      <button class="filter-btn" onclick="filterShop('games',this)">Games</button>
       <button class="filter-btn" onclick="filterShop('vaulted',this)">Vaulted / Exclusive</button>
+      <button class="filter-btn" onclick="filterShop('ebay',this)">🛒 eBay Listings</button>
+      <button class="filter-btn" onclick="filterShop('facebook',this)">📘 Facebook Listings</button>
     </div>
   </div>
 
@@ -517,8 +517,8 @@
 
       <h3>Follow Along</h3>
       <div class="social-btns">
-        <a href="https://www.ebay.ca/usr/chroniccrash" target="_blank" class="social-btn">🛒 eBay</a>
-        <a href="#" class="social-btn">📘 Facebook</a>
+        <a href="https://www.ebay.ca/usr/chroniccrash" target="_blank" class="social-btn">🛒 eBay Store</a>
+        <a href="https://www.facebook.com/crashpayton" target="_blank" class="social-btn">📘 Facebook</a>
         <a href="#" class="social-btn">📸 Instagram</a>
       </div>
     </div>
@@ -578,20 +578,36 @@
 <script>
   // ── SHOP DATA ──
   const items = [
-    {name:"Jack Skellington Snowmobile",num:"#104",series:"Nightmare Before Christmas",price:"$190",badge:"exclusive",type:"funko",emoji:"🎃"},
-    {name:"NBC Pop! Trains – Complete Set",num:"#07–#12",series:"Nightmare Before Christmas",price:"$280",badge:"vaulted",type:"funko",emoji:"🚂"},
-    {name:"Stimpy",num:"#165",series:"Ren & Stimpy",price:"$50",badge:"vaulted",type:"funko",emoji:"🐱"},
-    {name:"X-Men Kate Pryde with Lockheed",num:"#952",series:"X-Men",price:"$38",badge:"exclusive",type:"funko",emoji:"✨"},
-    {name:"Heat Ray Godzilla",num:"#1018",series:"Godzilla vs Kong",price:"$32",badge:"new",type:"funko",emoji:"🦖"},
-    {name:"Tsunade (Creation Rebirth)",num:"Naruto",series:"Naruto Shippuden",price:"$28",badge:"exclusive",type:"funko",emoji:"🍃"},
-    {name:"Kramer (Good Cop)",num:"#1093",series:"Seinfeld",price:"$30",badge:"exclusive",type:"funko",emoji:"📺"},
-    {name:"Splatterhouse",num:"PS3",series:"PlayStation 3",price:"$45",badge:"new",type:"games",emoji:"🎮"},
-    {name:"Fallout: New Vegas",num:"PS3",series:"PlayStation 3",price:"$22",badge:"new",type:"games",emoji:"🎮"},
+    {name:"Jack Skellington in Snowmobile",num:"#104",series:"Nightmare Before Christmas",price:"$190",badge:"vaulted",type:"funko",emoji:"🎃",ch:"eBay"},
+    {name:"Tracksuit Jerry",num:"#574",series:"Rick and Morty",price:"$55",badge:"exclusive",type:"funko",emoji:"🥒",ch:"eBay"},
+    {name:"Stimpy",num:"#165",series:"Ren & Stimpy",price:"$50",badge:"vaulted",type:"funko",emoji:"🐱",ch:"eBay"},
+    {name:"Tsunade (Creation Rebirth)",num:"#1257",series:"Naruto Shippuden",price:"$50",badge:"exclusive",type:"funko",emoji:"🍃",ch:"eBay"},
+    {name:"Lady Deadpool",num:"#549",series:"Deadpool",price:"$52",badge:"exclusive",type:"funko",emoji:"⚔️",ch:"eBay"},
+    {name:"Samurai Jack — The Guardian",num:"#1055",series:"Samurai Jack",price:"$38",badge:"vaulted",type:"funko",emoji:"🗡️",ch:"eBay"},
+    {name:"X-Men Kate Pryde with Lockheed",num:"#952",series:"X-Men",price:"$38",badge:"exclusive",type:"funko",emoji:"✨",ch:"eBay"},
+    {name:"Rick & Morty 9-Figure Bundle",num:"Bundle",series:"Rick and Morty",price:"$120",badge:"vaulted",type:"funko",emoji:"🧪",ch:"eBay"},
+    {name:"Pickle Rick (Rat Suit)",num:"#333",series:"Rick and Morty",price:"$32",badge:"vaulted",type:"funko",emoji:"🥒",ch:"eBay"},
+    {name:"Pikachu Silver Metallic 25th Anniversary",num:"#353",series:"Pokemon",price:"$29",badge:"exclusive",type:"funko",emoji:"⚡",ch:"eBay"},
+    {name:"Kramer (Good Cop)",num:"#1093",series:"Seinfeld",price:"$30",badge:"exclusive",type:"funko",emoji:"📺",ch:"eBay"},
+    {name:"Kramer (Golf)",num:"#1092",series:"Seinfeld",price:"$30",badge:"exclusive",type:"funko",emoji:"⛳",ch:"eBay"},
+    {name:"Jaskier (Chase)",num:"#1320",series:"The Witcher",price:"$30",badge:"exclusive",type:"funko",emoji:"🎵",ch:"eBay"},
+    {name:"SNL Spartan Cheerleaders 2-Pack",num:"2-Pack",series:"SNL",price:"$44",badge:"vaulted",type:"funko",emoji:"📣",ch:"eBay"},
+    {name:"Heat Ray Godzilla",num:"#1018",series:"Godzilla vs Kong",price:"$32",badge:"new",type:"funko",emoji:"🦖",ch:"eBay"},
+    {name:"Cousin Itt",num:"#814",series:"The Addams Family",price:"$28",badge:"vaulted",type:"funko",emoji:"👁️",ch:"eBay"},
+    {name:"Godzilla vs Kong 4-Pack Bundle",num:"Bundle",series:"Godzilla vs Kong",price:"$55",badge:"new",type:"funko",emoji:"🦍",ch:"Facebook"},
+    {name:"Parks & Rec Bundle (4-Pack)",num:"Bundle",series:"Parks and Recreation",price:"$80",badge:"new",type:"funko",emoji:"🏛️",ch:"Facebook"},
+    {name:"Seinfeld Bundle — Elaine & Newman",num:"Bundle",series:"Seinfeld",price:"$35",badge:"vaulted",type:"funko",emoji:"📺",ch:"Facebook"},
+    {name:"Pikachu (Diamond Collection)",num:"#553",series:"Pokemon",price:"$25",badge:"exclusive",type:"funko",emoji:"💎",ch:"Facebook"},
+    {name:"Toronto Raptor",num:"#07",series:"NBA",price:"$23",badge:"exclusive",type:"funko",emoji:"🏀",ch:"eBay"},
+    {name:"T'Challa Star-Lord",num:"#871",series:"Marvel What If...?",price:"$25",badge:"new",type:"funko",emoji:"🌟",ch:"eBay"},
+    {name:"E.T. in Disguise",num:"#1253",series:"E.T. the Extra-Terrestrial",price:"$25",badge:"vaulted",type:"funko",emoji:"🛸",ch:"eBay"},
   ];
 
   function renderShop(filter) {
     const filtered = filter === 'all' ? items
       : filter === 'vaulted' ? items.filter(i => i.badge === 'exclusive' || i.badge === 'vaulted')
+      : filter === 'ebay' ? items.filter(i => i.ch === 'eBay')
+      : filter === 'facebook' ? items.filter(i => i.ch === 'Facebook')
       : items.filter(i => i.type === filter);
     document.getElementById('shopGrid').innerHTML = filtered.map(i => `
       <div class="product-card">
@@ -605,7 +621,7 @@
           <div class="prod-num">${i.num}</div>
           <div class="prod-footer">
             <div class="prod-price">${i.price} CAD</div>
-            <div class="prod-type">${i.type==='games'?'🎮 Game':'🎭 Pop'}</div>
+            <div class="prod-type" style="${i.ch==='eBay'?'color:#5ab4ff;border-color:rgba(90,180,255,0.3);background:rgba(90,180,255,0.08)':'color:#1D9E75;border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.08)'}">${i.ch==='eBay'?'🛒 eBay':'📘 Facebook'}</div>
           </div>
         </div>
       </div>`).join('');
